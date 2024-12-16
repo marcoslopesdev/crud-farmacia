@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.generation.farmacia.model.Produto;
 import com.generation.farmacia.repository.CategoriaRepository;
 import com.generation.farmacia.repository.ProdutoRepository;
+import com.generation.farmacia.service.ProdutoService;
 
 import jakarta.validation.Valid;
 
@@ -88,5 +89,14 @@ public class ProdutoController {
         
         produtoRepository.deleteById(id);              
     }
+    
+    @Autowired
+    private ProdutoService produtoService;
+
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<Produto>> getProdutosDisponiveis() {
+        return ResponseEntity.ok(produtoService.buscarProdutosDisponiveis());
+    }
+
 
 }
